@@ -19,19 +19,11 @@ public class Main {
     private static final int SLEEPING_TIME = Integer.MAX_VALUE;
 
     public static void main(String... args) {
-
+        //FIXME [LION] Implement a provider pool.
         startServer(HayParo.class);
-        startHayParo();
+        System.out.println("HayParo started");
         keepRunning();
 
-    }
-
-    private static void startHayParo() {
-
-        //FIXME [LION] Implement a better logger.
-        System.out.println("Starting HayParo");
-        new HayParo();
-        System.out.println("HayParo started");
     }
 
     private static void keepRunning() {
@@ -48,7 +40,7 @@ public class Main {
     }
 
     private static void startServer(Class... classes) {
-        URI baseUri = UriBuilder.fromUri("http://localhost/").port(8080).build();
+        URI baseUri = UriBuilder.fromUri("http://0.0.0.0/").port(8080).build();
         ResourceConfig config = create(classes);
         HttpServer server = JdkHttpServerFactory.createHttpServer(baseUri, config);
 
